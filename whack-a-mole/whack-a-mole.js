@@ -55,9 +55,7 @@ for (const e of feild) {
 const makeMoleHill = (cell) => feild[cell].classList.add('mole-hill')
 
 // Randomly select the square for the mole to make their hill
-const randCell = () => {
-  Math.floor(Math.random() * feild.length)
-}
+const randCell = () => Math.floor(Math.random() * feild.length)
 
 // Pop our first mole into play
 makeMoleHill(randCell())
