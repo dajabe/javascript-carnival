@@ -67,3 +67,8 @@ td {
 .shoes {
   z-index: 1
 }
+
+.mole-hill {
+  background-image: url('./whack-a-mole/mole.PNG');
+  background-size: contain;
+}
