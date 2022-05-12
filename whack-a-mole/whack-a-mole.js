@@ -22,11 +22,16 @@ whack.preload = 'auto'
 
 // Whack counter
 let whackCount = 0
+let highestWhacks = 0
 
 // Whack timer in seconds.
-const whackTime = 5
+const whackTime = 10
 let whackCountdown = whackTime
 let whackTimer
+
+// No more repeated cells
+// We might be able to do this more reliably with a recursive function
+let prevCell
 
 const whackEm = (e) => {
   if (whackCount === 0) {
@@ -50,7 +55,9 @@ for (const e of feild) {
 const makeMoleHill = (cell) => feild[cell].classList.add('mole-hill')
 
 // Randomly select the square for the mole to make their hill
-const randCell = () => Math.floor(Math.random() * feild.length)
+const randCell = () => {
+  Math.floor(Math.random() * feild.length)
+}
 
 // Pop our first mole into play
 makeMoleHill(randCell())
@@ -75,8 +82,9 @@ const decreaseTime = () => {
   } else {
     clearInterval(whackTimer)
     window.alert(
-      `You whacked ${whackCount} moles!\n
-That's ${whackCount / whackTime} whacks per second!!!`
+      `${updateWhackHigh(whackCount)}You whacked ${whackCount} moles!\nThat's ${
+        whackCount / whackTime
+      } whacks per second!!!`
     )
     whackReset()
   }
@@ -90,3 +98,17 @@ const showTime = (time) => {
 
 // Sets initial timer value to what the variable says.
 showTime(whackTime)
+
+const showWhackHigh = () => {
+  document.getElementById('whack-highscore').innerHTML = highestWhacks
+}
+
+const updateWhackHigh = (score) => {
+  if (score > highestWhacks) {
+    highestWhacks = score
+    showWhackHigh()
+    return `Congratulations new highscore!\n\n`
+  } else {
+    return `The best whacker whacks ${highestWhacks} moles\n\n`
+  }
+}
