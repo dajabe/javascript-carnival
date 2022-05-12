@@ -33,6 +33,19 @@ let whackTimer
 // We might be able to do this more reliably with a recursive function
 let prevCell
 
+const noRepeat = () => {
+  let cell = Math.floor(Math.random() * Number(feild.length))
+  if (cell != prevCell) {
+    console.log(
+      `New cell: ${cell} and is ${typeof cell}, Prev Cell: ${prevCell}`
+    )
+    return cell
+  } else {
+    console.log('Get another number')
+    return noRepeat()
+  }
+}
+
 const whackEm = (e) => {
   if (whackCount === 0) {
     whackTimer = setInterval(decreaseTime, 1000)
@@ -43,7 +56,8 @@ const whackEm = (e) => {
     // remove class
     e.target.classList.remove('mole-hill')
     updateWhackCount(++whackCount)
-    makeMoleHill(randCell())
+    let cell = noRepeat()
+    makeMoleHill(cell)
   }
 }
 
@@ -52,13 +66,17 @@ for (const e of feild) {
 }
 
 // Create the molehill.
-const makeMoleHill = (cell) => feild[cell].classList.add('mole-hill')
+const makeMoleHill = (cell) => {
+  console.log(typeof cell)
+  feild[cell].classList.add('mole-hill')
+  prevCell = cell
+}
 
 // Randomly select the square for the mole to make their hill
 const randCell = () => Math.floor(Math.random() * feild.length)
 
 // Pop our first mole into play
-makeMoleHill(randCell())
+makeMoleHill(noRepeat())
 
 const updateWhackCount = (whacks) => {
   document.getElementById('whack-number').innerHTML = whacks
@@ -75,7 +93,7 @@ const whackReset = () => {
 
 const decreaseTime = () => {
   if (whackCountdown > 0) {
-    whackCountdown--
+    --whackCountdown
     showTime(whackCountdown)
   } else {
     clearInterval(whackTimer)
