@@ -17,7 +17,7 @@ const feild = document.getElementsByTagName('TD')
 
 // Bring in our whacking sound
 const whack = new Audio('./whack-audio.wav')
-whack.volume = 0.2
+const whackVolume = 0.2
 whack.preload = 'auto'
 
 // Whack counter
@@ -36,12 +36,8 @@ let prevCell
 const noRepeat = () => {
   let cell = Math.floor(Math.random() * Number(feild.length))
   if (cell != prevCell) {
-    console.log(
-      `New cell: ${cell} and is ${typeof cell}, Prev Cell: ${prevCell}`
-    )
     return cell
   } else {
-    console.log('Get another number')
     return noRepeat()
   }
 }
@@ -52,7 +48,9 @@ const whackEm = (e) => {
   }
   if (e.target.className === 'mole-hill') {
     // play sound, cloneNode() here allows the sound effects to overlap and so you get a new sound with each click
-    whack.cloneNode().play()
+    let newWhack = whack.cloneNode()
+    newWhack.volume = whackVolume
+    newWhack.play()
     // remove class
     e.target.classList.remove('mole-hill')
     updateWhackCount(++whackCount)
