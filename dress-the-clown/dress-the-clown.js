@@ -45,6 +45,8 @@ const keyPress = (e) => {
   }
 }
 
+document.onkeydown = keyPress
+
 // Feature changing functions all look the same. This can probably be a single function
 // As single function should take args (feature, option)
 
@@ -95,5 +97,3 @@ function changeFeature(up) {
       break
   }
 }
-
-document.onkeydown = keyPress
