@@ -6,8 +6,7 @@ console.log('Dress The Clown!')
 
 // track which feature we're customising
 // What features are there?
-const features = ['head', 'body', 'shoes']
-const selectedFeature = features[0]
+let features = ['head', 'body', 'shoes']
 // number options for each feature
 const howManyOptions = 6
 
@@ -51,7 +50,13 @@ function changeOption(feature, up) {
   }
 }
 
-function changeFeature(up) {}
-
-changeOption(selectedFeature, true)
-changeOption(selectedFeature, true)
+function changeFeature(up) {
+  switch (up) {
+    case true: // Take last feature and make it top feature
+      features.unshift(features.pop())
+      break
+    case false: // Take top feature and make it last feature
+      features.push(features.shift())
+      break
+  }
+}
