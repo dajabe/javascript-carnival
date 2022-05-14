@@ -73,3 +73,17 @@ td {
   background-image: url('./whack-a-mole/mole.PNG');
   background-size: contain;
 }
+
+.hide {
+  visibility: hidden;
+}
+
+#head-arrow {
+  
+}
+#body-arrow {
+  
+}
+#shoes-arrow {
+  
+}

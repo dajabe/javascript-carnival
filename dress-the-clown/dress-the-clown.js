@@ -11,8 +11,10 @@ let features = ['head', 'body', 'shoes']
 const optMax = 5
 
 // update feature on page
-function updateFeature(clown, feature) {
-  document.getElementById(feature).src = clown[feature]
+function updateFeature(feature, curOpt, newOpt) {
+  const img = document.getElementById(feature)
+  img.src = img.getAttribute('src').replace(curOpt, newOpt)
+  document.getElementById(`${feature}-option`).innerHTML = `${newOpt}`
 }
 
 // create an object to represent the clown
@@ -64,10 +66,12 @@ function changeOption(feature, up) {
     case true:
       switch (optNum) {
         case optMax:
-          img.src = img.getAttribute('src').replace(optNum, 0)
+          // img.src = img.getAttribute('src').replace(optNum, 0)
+          updateFeature(feature, optNum, 0)
           break
         default:
-          img.src = img.getAttribute('src').replace(optNum, ++optNum)
+          // img.src = img.getAttribute('src').replace(optNum, ++optNum)
+          updateFeature(feature, optNum, ++optNum)
           break
       }
       break
@@ -75,10 +79,12 @@ function changeOption(feature, up) {
     case false:
       switch (optNum) {
         case 0:
-          img.src = img.getAttribute('src').replace(optNum, optMax)
+          // img.src = img.getAttribute('src').replace(optNum, optMax)
+          updateFeature(feature, optNum, optMax)
           break
         default:
-          img.src = img.getAttribute('src').replace(optNum, --optNum)
+          // img.src = img.getAttribute('src').replace(optNum, --optNum)
+          updateFeature(feature, optNum, --optNum)
           break
       }
       break
@@ -90,10 +96,14 @@ function changeOption(feature, up) {
 function changeFeature(up) {
   switch (up) {
     case true: // Take last feature and make it top feature
+      document.getElementById(`${features[0]}-arrow`).classList.toggle('hide')
       features.unshift(features.pop())
+      document.getElementById(`${features[0]}-arrow`).classList.toggle('hide')
       break
     case false: // Take top feature and make it last feature
+      document.getElementById(`${features[0]}-arrow`).classList.toggle('hide')
       features.push(features.shift())
+      document.getElementById(`${features[0]}-arrow`).classList.toggle('hide')
       break
   }
 }
