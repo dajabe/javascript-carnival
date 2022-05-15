@@ -65,6 +65,12 @@ td {
   overflow: unset;
 }
 
+canvas {
+  position: absolute;
+  left: 380px;
+  top: 0px;
+} 
+
 .dress-an-image {
   position: absolute;
   top: 0px;

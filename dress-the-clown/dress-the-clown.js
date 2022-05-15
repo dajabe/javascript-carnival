@@ -18,13 +18,11 @@ function updateFeature(feature, curOpt, newOpt) {
 }
 
 // create an object to represent the clown
-let ourClown = {
-  head: document.getElementById('head').getAttribute('src'),
-  body: document.getElementById('body').getAttribute('src'),
-  shoes: document.getElementById('shoes').getAttribute('src'),
+function Clown() {
+  this.head = document.getElementById('head')
+  this.body = document.getElementById('body')
+  this.shoes = document.getElementById('shoes')
 }
-
-console.log(ourClown)
 
 // document.getElementById('head').onclick = updateFeature(ourClown, 'head')
 
@@ -47,7 +45,33 @@ const keyPress = (e) => {
   }
 }
 
+// console.log(canvas.getContext('2d'))
+
+const saveClown = () => {
+  let theClown = new Clown()
+  let drawingArea = document.getElementById('to-save')
+  let canva = drawingArea.getContext('2d')
+  drawingArea.width = theClown.body.width
+  drawingArea.height = theClown.head.height
+  canva.drawImage(theClown.body, 0, 0)
+  canva.drawImage(theClown.shoes, 0, 0)
+  canva.drawImage(theClown.head, 0, 0)
+  var image = document.getElementById('to-save').toDataURL('image/png')
+
+  download(image)
+}
+
+function download(url) {
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'clown.png'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+}
+
 document.onkeydown = keyPress
+document.getElementById('save-clown').onclick = saveClown
 
 // Feature changing functions all look the same. This can probably be a single function
 // As single function should take args (feature, option)
