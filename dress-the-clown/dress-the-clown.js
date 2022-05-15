@@ -45,7 +45,8 @@ const keyPress = (e) => {
   }
 }
 
-// console.log(canvas.getContext('2d'))
+// This works but it's inelegant and I don't understand fully what I'm doing here.
+// It also doesn't give the option to save with a file name of choosing.
 
 const saveClown = () => {
   let theClown = new Clown()
