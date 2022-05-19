@@ -62,6 +62,9 @@ const saveClown = () => {
   download(image)
 }
 
+// Form with a text feild to define file name
+// Trigger a save as
+
 function download(url) {
   const a = document.createElement('a')
   a.href = url
